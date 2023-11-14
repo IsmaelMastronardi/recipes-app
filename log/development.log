@@ -424,3 +424,65 @@ Completed 200 OK in 49ms (Views: 32.4ms | ActiveRecord: 0.5ms | Allocations: 319
   [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
   [1m[36mRecipe Create (14.2ms)[0m  [1m[32mINSERT INTO "recipes" ("name", "preparation_time", "cooking_time", "description", "public", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "burger"], ["preparation_time", "20 minutes"], ["cooking_time", "2 minutes"], ["description", "The best meal ever!"], ["public", true], ["user_id", 1], ["created_at", "2023-11-14 11:30:48.986044"], ["updated_at", "2023-11-14 11:30:48.986044"]]
   [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 127.0.0.1 at 2023-11-14 14:33:49 +0300
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby32-x64/lib/ruby/gems/3.2.0/gems/railties-7.1.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby32-x64/lib/ruby/gems/3.2.0/gems/railties-7.1.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 13)
+Completed 200 OK in 19ms (Views: 6.5ms | ActiveRecord: 0.0ms | Allocations: 214)
+
+
+Started GET "/recipies" for 127.0.0.1 at 2023-11-14 14:33:53 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/recipies"):
+  
+Started GET "/recipes" for 127.0.0.1 at 2023-11-14 14:34:02 +0300
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (225.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.6ms | Allocations: 288)
+  Rendered recipes/index.html.erb within layouts/application (Duration: 415.1ms | Allocations: 12428)
+  Rendered layout layouts/application.html.erb (Duration: 443.9ms | Allocations: 14444)
+Completed 200 OK in 453ms (Views: 152.3ms | ActiveRecord: 294.5ms | Allocations: 14723)
+
+
+Started GET "/recipes/1" for 127.0.0.1 at 2023-11-14 14:34:14 +0300
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 25)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 5.7ms | Allocations: 714)
+  Rendered layout layouts/application.html.erb (Duration: 27.0ms | Allocations: 2709)
+Completed 200 OK in 50ms (Views: 30.0ms | ActiveRecord: 1.6ms | Allocations: 4135)
+
+
+Started GET "/recipes/1/edit" for 127.0.0.1 at 2023-11-14 14:34:20 +0300
+Processing by RecipesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/edit.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 336.5ms | Allocations: 15063)
+  Rendered recipes/edit.html.erb within layouts/application (Duration: 344.3ms | Allocations: 15382)
+  Rendered layout layouts/application.html.erb (Duration: 379.8ms | Allocations: 17377)
+Completed 200 OK in 399ms (Views: 382.9ms | ActiveRecord: 0.8ms | Allocations: 18145)
+
+
+Started GET "/recipes/1" for 127.0.0.1 at 2023-11-14 15:08:14 +0300
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (6.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 25)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 5.5ms | Allocations: 516)
+  Rendered layout layouts/application.html.erb (Duration: 94.2ms | Allocations: 2511)
+Completed 200 OK in 332ms (Views: 99.0ms | ActiveRecord: 34.4ms | Allocations: 6055)
+
+
