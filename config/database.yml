@@ -11,7 +11,10 @@ default: &default
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: recipe_app
+  username: postgres
+  password: ismael-ali
+  port: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
