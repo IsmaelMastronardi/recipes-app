@@ -4,14 +4,14 @@ one:
   name: MyString
   preparation_time: MyString
   cooking_time: MyString
-  description: MyString
-  public: MyString
+  description: MyText
+  public: false
   user: one
 
 two:
   name: MyString
   preparation_time: MyString
   cooking_time: MyString
-  description: MyString
-  public: MyString
+  description: MyText
+  public: false
   user: two

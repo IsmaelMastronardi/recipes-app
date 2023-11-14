@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+# 3.times do |i|
+#     User.create(
+#         name: "User#{i}"
+#     )
+# end
+user = User.first
+Recipe.create(
+    name: "burger",
+    preparation_time: "20 minutes",
+    cooking_time: "2 minutes",
+    description: "The best meal ever!",
+    public: true,
+    user: user
+)
