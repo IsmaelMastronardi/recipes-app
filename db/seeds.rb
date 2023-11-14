@@ -9,11 +9,11 @@
 #   end
 
 
-# 3.times do |i|
-#     User.create(
-#         name: "User#{i}"
-#     )
-# end
+3.times do |i|
+    User.create(
+        name: "User#{i}"
+    )
+end
 user = User.first
 Recipe.create(
     name: "burger",
