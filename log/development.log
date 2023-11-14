@@ -486,3 +486,369 @@ Processing by RecipesController#show as HTML
 Completed 200 OK in 332ms (Views: 99.0ms | ActiveRecord: 34.4ms | Allocations: 6055)
 
 
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6346737304502236215)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (5.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (5.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDeviseToUsers (20231114132117)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.4ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp(6)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp(6)[0m
+  [1m[35m (17.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(6346737304502236215)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (5.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (5.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (182.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "recipe_app"[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "recipe_app"[0m
+  [1m[35m (1131.9ms)[0m  [1m[35mCREATE DATABASE "recipe_app" ENCODING = 'unicode'[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE DATABASE "recipe_app" ENCODING = 'unicode'[0m
+  [1m[35m (57.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (15.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6346737304502236215)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (12.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-14 13:29:27.019933', '2023-11-14 13:29:27.019943') RETURNING "key"[0m
+Migrating to CreateUsers (20231114111648)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (33.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231114111648') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRecipes (20231114112151)
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (36.7ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" bigserial primary key, "name" character varying, "preparation_time" character varying, "cooking_time" character varying, "description" text, "public" boolean, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_9606fce865"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE INDEX "index_recipes_on_user_id" ON "recipes" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231114112151') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20231114132117)
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.1ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp(6)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp(6)[0m
+  [1m[35m (11.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231114132117') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6346737304502236215)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (7.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (6.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/recipes" for 127.0.0.1 at 2023-11-14 16:31:08 +0300
+Started GET "/" for 127.0.0.1 at 2023-11-14 16:31:17 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (8.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (196.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/index.html.erb within layouts/application (Duration: 224.9ms | Allocations: 3815)
+  Rendered layout layouts/application.html.erb (Duration: 481.6ms | Allocations: 17690)
+Completed 200 OK in 808ms (Views: 309.0ms | ActiveRecord: 229.2ms | Allocations: 20648)
+
+
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby32-x64/lib/ruby/gems/3.2.0/gems/railties-7.1.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby32-x64/lib/ruby/gems/3.2.0/gems/railties-7.1.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 7.9ms | Allocations: 265)
+Completed 200 OK in 91ms (Views: 13.1ms | ActiveRecord: 0.0ms | Allocations: 901)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2023-11-14 16:31:34 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/sign_in"):
+  
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-11-14 16:31:49 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering C:/Ruby32-x64/lib/ruby/gems/3.2.0/gems/devise-4.9.3/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered C:/Ruby32-x64/lib/ruby/gems/3.2.0/gems/devise-4.9.3/app/views/devise/sessions/new.html.erb within layouts/application (Duration: 5.6ms | Allocations: 1334)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | Allocations: 1404)
+Completed 500 Internal Server Error in 345ms (ActiveRecord: 49.4ms | Allocations: 12121)
+
+
+  
+ActionView::Template::Error (undefined method `session_path' for #<ActionView::Base:0x00000000017ac0>):
+    1: <h2>Log in</h2>
+    2: 
+    3: <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="field">
+    5:     <%= f.label :email %><br />
+    6:     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  
+devise (4.9.3) app/views/devise/sessions/new.html.erb:3
+actionview (7.1.2) lib/action_view/base.rb:264:in `public_send'
+actionview (7.1.2) lib/action_view/base.rb:264:in `_run'
+actionview (7.1.2) lib/action_view/template.rb:261:in `block in render'
+activesupport (7.1.2) lib/active_support/notifications.rb:208:in `instrument'
+actionview (7.1.2) lib/action_view/template.rb:549:in `instrument_render_template'
+actionview (7.1.2) lib/action_view/template.rb:249:in `render'
+actionview (7.1.2) lib/action_view/renderer/template_renderer.rb:66:in `block (2 levels) in render_template'
+activesupport (7.1.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.2) lib/active_support/notifications.rb:206:in `instrument'
+actionview (7.1.2) lib/action_view/renderer/template_renderer.rb:60:in `block in render_template'
+actionview (7.1.2) lib/action_view/renderer/template_renderer.rb:76:in `block in render_with_layout'
+activesupport (7.1.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.2) lib/active_support/notifications.rb:206:in `instrument'
+actionview (7.1.2) lib/action_view/renderer/template_renderer.rb:75:in `render_with_layout'
+actionview (7.1.2) lib/action_view/renderer/template_renderer.rb:59:in `render_template'
+actionview (7.1.2) lib/action_view/renderer/template_renderer.rb:11:in `render'
+actionview (7.1.2) lib/action_view/renderer/renderer.rb:63:in `render_template_to_object'
+actionview (7.1.2) lib/action_view/renderer/renderer.rb:31:in `render_to_object'
+actionview (7.1.2) lib/action_view/rendering.rb:135:in `block in _render_template'
+actionview (7.1.2) lib/action_view/base.rb:291:in `in_rendering_context'
+actionview (7.1.2) lib/action_view/rendering.rb:134:in `_render_template'
+actionpack (7.1.2) lib/action_controller/metal/streaming.rb:256:in `_render_template'
+actionview (7.1.2) lib/action_view/rendering.rb:121:in `render_to_body'
+actionpack (7.1.2) lib/action_controller/metal/rendering.rb:158:in `render_to_body'
+actionpack (7.1.2) lib/action_controller/metal/renderers.rb:141:in `render_to_body'
+actionpack (7.1.2) lib/abstract_controller/rendering.rb:27:in `render'
+actionpack (7.1.2) lib/action_controller/metal/rendering.rb:139:in `render'
+actionpack (7.1.2) lib/action_controller/metal/instrumentation.rb:29:in `block (2 levels) in render'
+C:/Ruby32-x64/lib/ruby/3.2.0/benchmark.rb:311:in `realtime'
+activesupport (7.1.2) lib/active_support/core_ext/benchmark.rb:14:in `ms'
+actionpack (7.1.2) lib/action_controller/metal/instrumentation.rb:29:in `block in render'
+actionpack (7.1.2) lib/action_controller/metal/instrumentation.rb:98:in `cleanup_view_runtime'
+activerecord (7.1.2) lib/active_record/railties/controller_runtime.rb:39:in `cleanup_view_runtime'
+actionpack (7.1.2) lib/action_controller/metal/instrumentation.rb:28:in `render'
+responders (3.1.1) lib/action_controller/responder.rb:245:in `default_render'
+responders (3.1.1) lib/action_controller/responder.rb:175:in `to_html'
+responders (3.1.1) lib/action_controller/responder.rb:168:in `respond'
+responders (3.1.1) lib/action_controller/responder.rb:161:in `call'
+responders (3.1.1) lib/action_controller/respond_with.rb:216:in `respond_with'
+devise (4.9.3) app/controllers/devise/sessions_controller.rb:14:in `new'
+actionpack (7.1.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.1.2) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.2) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.2) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.2) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+actiontext (7.1.2) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.2) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.2) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.2) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.2) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.2) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.2) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.2) lib/action_dispatch/routing/mapper.rb:21:in `block in <class:Constraints>'
+actionpack (7.1.2) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+actionpack (7.1.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.0.8) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.8) lib/rack/etag.rb:29:in `call'
+rack (3.0.8) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.8) lib/rack/head.rb:15:in `call'
+actionpack (7.1.2) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.2) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.2) lib/active_record/migration.rb:654:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.8) lib/rack/method_override.rb:28:in `call'
+rack (3.0.8) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.8) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.2) lib/rails/engine.rb:529:in `call'
+puma (6.4.0) lib/puma/configuration.rb:272:in `call'
+puma (6.4.0) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.0) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.0) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.0) lib/puma/server.rb:443:in `process_client'
+puma (6.4.0) lib/puma/server.rb:241:in `block in run'
+puma (6.4.0) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/user/sign_in" for 127.0.0.1 at 2023-11-14 16:33:13 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/user/sign_in"):
+  
+Started GET "/" for 127.0.0.1 at 2023-11-14 16:34:02 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (6.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 17.8ms | Allocations: 1000)
+  Rendered layout layouts/application.html.erb (Duration: 133.7ms | Allocations: 14869)
+Completed 200 OK in 232ms (Views: 156.5ms | ActiveRecord: 6.8ms | Allocations: 16032)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2023-11-14 16:34:40 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/sign_in"):
+  
+Started GET "/sign_in" for 127.0.0.1 at 2023-11-14 16:42:16 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (7.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/sign_in"):
+  
+Started GET "/" for 127.0.0.1 at 2023-11-14 16:42:24 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (9.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 219.2ms | Allocations: 4079)
+  Rendered layout layouts/application.html.erb (Duration: 1465.6ms | Allocations: 40131)
+Completed 200 OK in 1590ms (Views: 1438.6ms | ActiveRecord: 43.3ms | Allocations: 43563)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2023-11-14 16:42:34 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/sign_in"):
+  
+Started GET "/" for 127.0.0.1 at 2023-11-14 16:42:39 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 6.2ms | Allocations: 697)
+  Rendered layout layouts/application.html.erb (Duration: 26.1ms | Allocations: 2738)
+Completed 200 OK in 35ms (Views: 28.3ms | ActiveRecord: 0.9ms | Allocations: 3024)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-11-14 16:42:46 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 8.0ms | Allocations: 687)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 305.8ms | Allocations: 3814)
+  Rendered layout layouts/application.html.erb (Duration: 349.3ms | Allocations: 5936)
+Completed 200 OK in 750ms (Views: 397.0ms | ActiveRecord: 62.6ms | Allocations: 21134)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2023-11-14 16:42:53 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.6ms | Allocations: 221)
+  Rendered devise/shared/_links.html.erb (Duration: 2.0ms | Allocations: 139)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 17.6ms | Allocations: 1706)
+  Rendered layout layouts/application.html.erb (Duration: 37.7ms | Allocations: 3722)
+Completed 200 OK in 63ms (Views: 52.3ms | ActiveRecord: 0.0ms | Allocations: 4720)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-11-14 16:43:09 +0300
+Processing by Devise::RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"edub4ever@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (7.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "edub4ever@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (3.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", nil], ["created_at", "2023-11-14 13:43:10.341268"], ["updated_at", "2023-11-14 13:43:10.341268"], ["email", "edub4ever@gmail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://127.0.0.1:3000/
+Completed 303 See Other in 729ms (ActiveRecord: 13.5ms | Allocations: 10986)
+
+
+Started GET "/" for 127.0.0.1 at 2023-11-14 16:43:10 +0300
+Processing by UsersController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 2.0ms | Allocations: 161)
+  Rendered users/index.html.erb within layouts/application (Duration: 53.1ms | Allocations: 1416)
+  Rendered layout layouts/application.html.erb (Duration: 85.5ms | Allocations: 3425)
+Completed 200 OK in 99ms (Views: 89.4ms | ActiveRecord: 1.0ms | Allocations: 3746)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2023-11-14 16:43:31 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:62:in `set_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/_user.html.erb (Duration: 0.2ms | Allocations: 14)
+  Rendered users/show.html.erb within layouts/application (Duration: 6.7ms | Allocations: 729)
+  Rendered layout layouts/application.html.erb (Duration: 27.7ms | Allocations: 2730)
+Completed 200 OK in 64ms (Views: 31.8ms | ActiveRecord: 2.0ms | Allocations: 4257)
+
+
+Started GET "/users" for 127.0.0.1 at 2023-11-14 16:43:34 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 14)
+  Rendered users/index.html.erb within layouts/application (Duration: 10.2ms | Allocations: 856)
+  Rendered layout layouts/application.html.erb (Duration: 30.0ms | Allocations: 2863)
+Completed 200 OK in 40ms (Views: 32.8ms | ActiveRecord: 1.1ms | Allocations: 3148)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2023-11-14 16:43:43 +0300
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 21ms (ActiveRecord: 0.8ms | Allocations: 1862)
+
+
+Started GET "/" for 127.0.0.1 at 2023-11-14 16:43:43 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 14)
+  Rendered users/index.html.erb within layouts/application (Duration: 11.5ms | Allocations: 859)
+  Rendered layout layouts/application.html.erb (Duration: 38.9ms | Allocations: 2866)
+Completed 200 OK in 53ms (Views: 42.5ms | ActiveRecord: 1.7ms | Allocations: 3143)
+
+
