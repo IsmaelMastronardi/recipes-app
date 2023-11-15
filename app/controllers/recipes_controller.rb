@@ -56,11 +56,12 @@ class RecipesController < ApplicationController
   end
 
   def toggle_public
-    puts 'AAAAAAAAAAAAAAAAAAAAAAAAAA'
-    puts @recipe.public
     @recipe.toggle!(:public)
-    puts 'BBBBBBBBBBBBBBBBBBBBBBBBBB'
-    puts @recipe.public
+    if @recipe.public 
+      puts 'public'
+    else
+      puts 'private'
+    end
   end
 
   private
