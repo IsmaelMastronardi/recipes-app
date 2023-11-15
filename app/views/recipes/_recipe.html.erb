@@ -29,4 +29,21 @@
     <%= recipe.user_id %>
   </p>
 
+
+  <%= form_with model: @recipe, url: toggle_public_recipe_path(@recipe), method: :patch do |f| %>
+    <%= f.hidden_field :public %>
+    <%= f.submit "#{ @recipe.public ? 'Public' : 'Private' }" %>
+  <% end %>
+
+
+  <button>
+    Generate shopping list
+  </button>
+
+  <button>
+    Add ingrdient
+  </button>
+  
+  <br>
+
 </div>
