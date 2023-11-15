@@ -1,53 +1,92 @@
-<div id="<%= dom_id recipe %>">
-  <p>
-    <strong>Name:</strong>
-    <%= recipe.name %>
-  </p>
+<div class="">
+  <div id="<%= dom_id recipe %>">
+  <div>
+    <p>
+      <strong><%= recipe.name %></strong>   
+    </p>
+  </div>
 
-  <p>
-    <strong>Preparation time:</strong>
-    <%= recipe.preparation_time %>
-  </p>
+  <div class="flex flex-row">
+    <p>
+      <strong>Preparation time:</strong>
+      <%= recipe.preparation_time %>
+    </p>
+    <%= form_with model: @recipe, url: toggle_public_recipe_path(@recipe), method: :patch do |f| %>
+      <%= f.hidden_field :public %>
+      <%= f.submit "#{ @recipe.public ? 'Public' : 'Private' }" %>
+    <% end %>
 
-  <p>
-    <strong>Cooking time:</strong>
-    <%= recipe.cooking_time %>
-  </p>
+    <p>
+      <strong>Public:</strong>
+      <%= recipe.public %>
+    </p>
+  </div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= recipe.description %>
-  </p>
+  <div>
+    <p>
+      <strong>Cooking time:</strong>
+      <%= recipe.cooking_time %>
+    </p>
+  </div>
 
-  <p>
-    <strong>Public:</strong>
-    <%= recipe.public %>
-  </p>
+  <div>
+    <p>
+      <strong>Description:</strong>
+      <%= recipe.description %>
+    </p>
+  </div>
 
-  <p>
-    <strong>User:</strong>
-    <%= recipe.user_id %>
-  </p>
+  <div class="flex flex-row">
+    <button class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
+      Generate shopping list
+    </button>
+    <button class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0 ml-10">
+      Add ingrdient
+    </button>
+  </div>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border w-full">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                      Food
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Quantity
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Value
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Actions
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+            <% recipe.foods.each do |food| %>
+              <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <%= food.name %>
+                  </th>
+                  <td class="px-6 py-4">
+                    <%= food.quantity %>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= food.price %>
+                  </td>
+                  <td class="px-6 py-4">
+                    Modify - Remove
+                  </td>               
+              </tr>
+              <% end %>
+          </tbody>
+      </table>
+  </div>
 
 
-  <%= form_with model: @recipe, url: toggle_public_recipe_path(@recipe), method: :patch do |f| %>
-    <%= f.hidden_field :public %>
-    <%= f.submit "#{ @recipe.public ? 'Public' : 'Private' }" %>
-  <% end %>
 
-
-  <button>
-    Generate shopping list
-  </button>
-
-  <button>
-    Add ingrdient
-  </button>
-  
-  <% recipe.foods.each do |food| %>
-    <p><%= food.name %></p>
-    <p><%= food.quantity %></p>
-    <p><%= food.price %></p>
-    <p>Modify - Remove</p>
-  <% end %>
+  </div>
 </div>
+
+
