@@ -57,7 +57,7 @@ class RecipesController < ApplicationController
 
   def toggle_public
     @recipe.toggle!(:public)
-    if @recipe.public 
+    if @recipe.public
       puts 'public'
     else
       puts 'private'
