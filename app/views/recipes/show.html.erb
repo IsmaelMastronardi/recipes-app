@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<section class="flex flex-col text-center w-full mb-12">
+  <p style="color: green"><%= notice %></p>
 
-<%= render @recipe %>
+  <% if can? :read, @recipe %>
+    <%= render @recipe %>
+  <% else %>
+    <p>This recipe is not public.</p>
+  <% end %>
 
-<div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
-  <%= link_to "Back to recipes", recipes_path %>
+  <div>
+    <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
+    <%= link_to "Back to recipes", recipes_path %>
 
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
-</div>
+    <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+  </div>
+</section>

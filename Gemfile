@@ -70,3 +70,7 @@ end
 gem 'rubocop'
 
 gem 'devise'
+
+gem 'cancancan'
+
+gem 'tailwindcss-rails', '~> 2.0'

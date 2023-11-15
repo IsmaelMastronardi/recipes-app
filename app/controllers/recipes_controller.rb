@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update destroy]
+  before_action :set_recipe, only: %i[show edit update destroy toggle_public]
 
   # GET /recipes or /recipes.json
   def index
@@ -35,7 +35,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if @recipe.update(public_switch_params)
         format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -55,6 +55,15 @@ class RecipesController < ApplicationController
     end
   end
 
+  def toggle_public
+    @recipe.toggle!(:public)
+    if @recipe.public
+      puts 'public'
+    else
+      puts 'private'
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -65,5 +74,10 @@ class RecipesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def recipe_params
     params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public, :user_id)
+  end
+
+  def public_switch_params
+    puts params
+    params.require(:recipe).permit(:public)
   end
 end

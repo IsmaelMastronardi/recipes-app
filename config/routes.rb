@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   resources :recipe_foods
   resources :foods
   devise_for :users
-  resources :recipes
+  resources :recipes do
+    member do
+      patch 'toggle_public'
+    end
+  end
+
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
