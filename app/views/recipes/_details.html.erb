@@ -76,7 +76,9 @@
               </td>
               <td class="px-6 py-4">
                 <%= link_to "Modify", edit_food_path(food) %>
-                <p>Remove</p>           
+                <%= form_with model: @recipe, url: destroy_food_relation_recipe_food_path(recipe, food), method: :post do |f| %>
+                  <%= f.submit "Remove" %>
+                <% end %> 
               </td>               
           </tr>
           <% end %>

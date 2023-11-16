@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   resources :foods
   devise_for :users
   resources :recipes do
+    resources :foods, only: [] do
+      member do
+        post 'destroy_food_relation'
+      end
+    end
     member do
       patch 'toggle_public'
       get 'new_food'

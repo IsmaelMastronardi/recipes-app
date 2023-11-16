@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: %i[show edit update destroy]
+  before_action :set_food, only: %i[show edit update destroy destroy_food_relation]
 
   # GET /foods or /foods.json
   def index
@@ -33,7 +33,6 @@ class FoodsController < ApplicationController
 
   # PATCH/PUT /foods/1 or /foods/1.json
   def update
-    puts 'JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ'
     respond_to do |format|
       if @food.update(food_params)
         format.html { redirect_to food_url(@food), notice: 'Food was successfully updated.' }
@@ -53,6 +52,11 @@ class FoodsController < ApplicationController
       format.html { redirect_to foods_url, notice: 'Food was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  # DELETE 
+  def destroy_food_relation
+    @recipe = @food.recipes.find(params[:recipe_id])
+    @food.recipes.delete(@recipe)
   end
 
   private
