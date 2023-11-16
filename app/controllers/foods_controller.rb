@@ -57,6 +57,7 @@ class FoodsController < ApplicationController
   def destroy_food_relation
     @recipe = @food.recipes.find(params[:recipe_id])
     @food.recipes.delete(@recipe)
+    redirect_back(fallback_location: recipe_path(params[:recipe_id]))
   end
 
   private
