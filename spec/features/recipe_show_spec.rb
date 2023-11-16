@@ -30,14 +30,11 @@ RSpec.describe 'Recipe show', type: :system do
     token = user.confirmation_token
     user.confirmation_token = token
     user.save
-
-    # Confirm the user account
     user.confirm
     sign_in user
   end
   it 'displays the details of a recipe' do
     visit recipe_path(recipe)
-
     expect(page).to have_content('test recipe')
     expect(page).to have_content('2 hours')
     expect(page).to have_content('1 hour')
@@ -50,5 +47,4 @@ RSpec.describe 'Recipe show', type: :system do
     expect(page).to have_content('10')
     expect(page).to have_content('2')
   end
-  # Your RSpec examples go here
 end
