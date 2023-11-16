@@ -1,2 +1,13 @@
 <div id="<%= dom_id food %>">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><%= food.name %></td>
+                <td><%= food.measurement_unit %></td>
+                <td><%= "$#{(food.price/food.quantity).round(2)}" %></td>
+                <td><%= button_to "Delete", food, method: :delete,
+                    data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
