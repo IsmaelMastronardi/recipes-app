@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Food, type: :model do
   let(:user) do
     User.create(name: 'example_user', email: 'user@example.com', password: 'password', id: 1)
-
   end
   subject { Food.new(name:'apple',measurement_unit:'grams' ,price: 5 ,quantity:10, user_id: user.id) }
 
