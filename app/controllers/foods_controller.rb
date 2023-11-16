@@ -33,6 +33,7 @@ class FoodsController < ApplicationController
 
   # PATCH/PUT /foods/1 or /foods/1.json
   def update
+    puts 'JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ'
     respond_to do |format|
       if @food.update(food_params)
         format.html { redirect_to food_url(@food), notice: 'Food was successfully updated.' }
@@ -66,3 +67,4 @@ class FoodsController < ApplicationController
     params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
   end
 end
+ 
