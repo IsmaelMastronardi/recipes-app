@@ -9,17 +9,31 @@
 #   end
 
 
-3.times do |i|
-    User.create(
-        name: "User#{i}"
-    )
-end
-user = User.first
-Recipe.create(
-    name: "burger",
-    preparation_time: "20 minutes",
-    cooking_time: "2 minutes",
-    description: "The best meal ever!",
-    public: true,
-    user: user
-)
+# 3.times do |i|
+#     User.create(
+#         name: "User#{i}"
+#     )
+# end
+# user = User.first
+# Recipe.create(
+#     name: "burger",
+#     preparation_time: "20 minutes",
+#     cooking_time: "2 minutes",
+#     description: "The best meal ever!",
+#     public: true,
+#     user: user
+# )
+
+# user = User.first
+# 4.times do |i|
+#     Food.create(
+#         name: "Food#{i}",
+#         measurement_unit: "grams",
+#         price: "#{40*i}",
+#         quantity: 5,
+#         user: user
+#     )
+# end
+
+food = Food.find(id:5)
+
