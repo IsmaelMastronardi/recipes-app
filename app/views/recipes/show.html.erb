@@ -2,7 +2,7 @@
   <p style="color: green"><%= notice %></p>
 
   <% if can? :read, @recipe %>
-    <%= render @recipe %>
+    <%= render 'details', recipe: @recipe %>
   <% else %>
     <p>This recipe is not public.</p>
   <% end %>

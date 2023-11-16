@@ -32,6 +32,23 @@ class RecipesController < ApplicationController
     end
   end
 
+  def new_food
+    @recipe = Recipe.find(params[:id])
+    @food = Food.new
+  end
+
+  def create_food
+    @recipe = Recipe.find(params[:id])
+    @food = Food.build(food_params.except(:id))
+    @food.user = current_user
+    @recipe.foods << @food
+    if @food.save
+      redirect_to recipe_path(@recipe), notice: 'Food was successfully added to the recipe.'
+    else
+      render :new_food
+    end
+  end
+
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
     respond_to do |format|
@@ -79,5 +96,9 @@ class RecipesController < ApplicationController
   def public_switch_params
     puts params
     params.require(:recipe).permit(:public)
+  end
+
+  def food_params
+    params.require(:food).permit(:name, :description, :measurement_unit, :price, :quantity)
   end
 end
