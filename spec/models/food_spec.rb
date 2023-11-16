@@ -4,7 +4,7 @@ RSpec.describe Food, type: :model do
   let(:user) do
     User.create(name: 'example_user', email: 'user@example.com', password: 'password', id: 1)
   end
-  subject { Food.new(name:'apple',measurement_unit:'grams' ,price: 5 ,quantity:10, user_id: user.id) }
+  subject { Food.new(name: 'apple', measurement_unit: 'grams', price: 5, quantity: 10, user_id: user.id) }
 
   before { subject.save }
 
@@ -35,5 +35,4 @@ RSpec.describe Food, type: :model do
   it 'should belong to user' do
     expect(user.foods).to eq([subject])
   end
-
 end

@@ -32,7 +32,6 @@ class RecipesController < ApplicationController
     end
   end
 
-
   def new_food
     @recipe = Recipe.find(params[:id])
     @food = Food.new
@@ -49,6 +48,7 @@ class RecipesController < ApplicationController
       render :new_food
     end
   end
+
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
     respond_to do |format|
