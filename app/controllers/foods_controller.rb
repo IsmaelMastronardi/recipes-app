@@ -3,7 +3,9 @@ class FoodsController < ApplicationController
 
   # GET /foods or /foods.json
   def index
-    @foods = Food.all
+    return unless user_signed_in?
+
+    @foods = Food.where(user_id: current_user.id)
   end
 
   # GET /foods/1 or /foods/1.json
