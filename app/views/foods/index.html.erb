@@ -1,16 +1,35 @@
 <p style="color: green"><%= notice %></p>
-<%= link_to "Add food", new_food_path %>
-<table class="table">
-  <thead>
-    <tr>
-        <th>Measurement Unit</th>
-        <th>Unit Price</th>
-        <th>Action</th>
-    </tr>
-</thead>
+
+
+<div class="flex flex-col w-full mb-12">
+<div class="mx-auto mb-10">
+<p class="text-3xl">Foods</p>
+</div>
+<div class="mx-auto mb-10">
+<%= button_to "Add food", new_food_path ,  class:"flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" %>
+</div>
+
+<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border w-1/2 mx-auto">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                Name
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Measurement Unit
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Unit Price
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @foods.each do |food| %>
+        <%= render food %>
+        <% end %>
+    </tbody>
 </table>
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-  <% end %>
 </div>
