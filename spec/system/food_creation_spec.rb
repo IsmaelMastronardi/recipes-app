@@ -26,7 +26,7 @@ RSpec.describe 'Food creation', type: :system do
     expect(page).to have_content('gram')
   end
 
-  it 'handles invalid data gracefully' do
+  it 'handles invalid data' do
     visit new_food_path
     click_button 'Create'
 
