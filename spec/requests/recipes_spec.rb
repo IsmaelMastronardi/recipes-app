@@ -1,57 +1,41 @@
 require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe 'Recipes', type: :request do
+RSpec.describe 'Foods index', type: :request do
   let(:user) do
-    User.create(name: 'example_user', email: 'user@example.com', password: 'password', id: 1)
+    User.create(name: 'example_user', email: 'user@example.com', password: 'password')
   end
-  let(:valid_attributes) do
-    {
-      name: 'test_recipe',
-      preparation_time: '1 hour',
-      cooking_time: '2 hours',
-      description: 'this is a test recipe',
+  let!(:recipe) do
+    Recipe.create(
+      name: 'recipe-1',
+      preparation_time: '20 minutes',
+      cooking_time: '10 minutes',
+      description: 'The best meal ever!',
       public: true,
-      user_id: user.id,
-      id: 1
-    }
+      user:
+    )
   end
 
-  let(:invalid_attributes) do
-    {
-      name:,
-      preparation_time:,
-      cooking_time:,
-      description:,
-      public: true,
-      user_id:
-    }
-  end
-  before(:each) do
+  before do
     token = user.confirmation_token
     user.confirmation_token = token
     user.save
-
-    # Confirm the user account
     user.confirm
     sign_in user
   end
-  describe 'GET /index' do
-    it 'goes to the correct path' do
-      get recipes_path
-      expect(response).to be_successful
-      expect(response.body).to include('Show this recipe')
-      expect(request.path).to eq(recipes_path)
-    end
-  end
 
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      recipe = Recipe.create! valid_attributes
-      puts 'AAAAAAAAAAAAAA'
-      get recipe_path(recipe)
-      expect(response).to be_successful
-      expect(response.body).to include('test_recipe')
-      expect(request.path).to eq(recipe_path(recipe))
+  describe 'GET /recipes' do
+    it 'Renders the index page for recipes successfully' do
+      get '/recipes'
+      expect(response.status).to eq(200)
+      expect(response).to render_template('index')
+    end
+    it 'Display correct recipe details' do
+      get '/recipes'
+      expect(response.status).to eq(200)
+      expect(response).to render_template('index')
+      expect(response.body).to include('recipe-1')
+      expect(response.body).to include('The best meal ever!')
     end
   end
 end

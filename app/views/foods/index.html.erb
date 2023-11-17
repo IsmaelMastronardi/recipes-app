@@ -8,9 +8,15 @@
         <th>Action</th>
     </tr>
 </thead>
-</table>
-<div id="foods">
+<tbody>
   <% @foods.each do |food| %>
-    <%= render food %>
+    <tr>
+        <td><%= food.name %></td>
+        <td><%= food.measurement_unit %></td>
+        <td><%= "$#{food.price}" %></td>
+        <td><%= button_to "Delete", food, method: :delete,
+            data: { confirm: 'Are you sure?' } %></td>
+    </tr>
   <% end %>
-</div>
+</tbody>
+</table>
