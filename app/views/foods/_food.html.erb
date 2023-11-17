@@ -8,9 +8,7 @@
     <td class="px-6 py-4">
         <%= food.price %>
     </td>
-    <td class="px-6 py-4">
-        <%= button_to "Delete", food, method: :delete,
-                    data: { confirm: 'Are you sure?' } %>     
+    <td class="px-6 py-4"> 
         <%= form_with model: @food, url: food_path(food), method: :DELETE do |f| %>
             <%= f.submit "Remove" %>
         <% end %>              
