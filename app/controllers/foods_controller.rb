@@ -2,9 +2,13 @@ class FoodsController < ApplicationController
   before_action :set_food, only: %i[show edit update destroy destroy_food_relation]
 
   # GET /foods or /foods.json
+  
   def index
-    # @foods = Food.all
-    @foods = current_user.foods.all
+    return unless user_signed_in?
+
+    @current_user = current_user
+    @foods = Food.where(user_id: @current_user.id)
+
   end
 
   # GET /foods/1 or /foods/1.json
