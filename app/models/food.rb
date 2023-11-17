@@ -1,7 +1,5 @@
 class Food < ApplicationRecord
-  belongs_to :user, class_name: 'User', foreign_key: 'user_id', optional: true
-  # needs to be optional in order to have some foods that are related to the recipe and not the user,
-  # so that the user can buy them
+  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
   has_many :food_recipes
   has_many :recipes, through: :food_recipes
 
