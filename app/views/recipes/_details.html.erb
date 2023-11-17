@@ -63,20 +63,20 @@
             </tr>
         </thead>
         <tbody>
-          <% recipe.foods.each do |food| %>
+          <% recipe.food_recipes.each do |f_recipe| %>
             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <%= food.name %>
+                  <%= f_recipe.food.name %>
                 </th>
                 <td class="px-6 py-4">
-                  <%= food.quantity %>
+                  <%= f_recipe.quantity %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= food.price %>
+                  <%= f_recipe.food.price %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= link_to "Modify", edit_food_path(food) %>
-                  <%= form_with model: @recipe, url: destroy_food_relation_recipe_food_path(recipe, food), method: :post do |f| %>
+                  <%= link_to "Modify", edit_food_path(f_recipe.food) %>
+                  <%= form_with model: @recipe, url: destroy_food_relation_recipe_food_path(recipe, f_recipe.food), method: :post do |f| %>
                     <%= f.submit "Remove" %>
                   <% end %> 
                 </td>               

@@ -9,7 +9,9 @@ class RecipesController < ApplicationController
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    nil unless user_signed_in?
+  end
 
   # GET /recipes/new
   def new
@@ -41,11 +43,14 @@ class RecipesController < ApplicationController
 
   def create_food
     @recipe = Recipe.find(params[:id])
-    @food = Food.build(food_params.except(:id))
-    @recipe.foods << @food
-    if @food.save
+    @food = Food.build(food_params.except(:quantity))
+    @food.user_id = current_user.id
+    @food.quantity = 0
+    @food_recipe = FoodRecipe.build(food: @food, recipe: @recipe, quantity: food_params[:quantity])
+    if @food.save && @food_recipe.save
       redirect_to recipe_path(@recipe), notice: 'Food was successfully added to the recipe.'
     else
+      puts @food.errors.full_messages
       render :new_food
     end
   end
@@ -76,58 +81,39 @@ class RecipesController < ApplicationController
   # Togle between public and private
   def toggle_public
     @recipe.toggle!(:public)
-    if @recipe.public
-      puts 'public'
-    else
-      puts 'private'
-    end
   end
-  # def general_shopping_list
-  #   @recipes = current_user.recipes
-  #   recipes_food_arr = []
-  #   @recipes.each { |r| recipes_food_arr.concat(r.foods) }
-  #   @foods_arr = current_user.foods
-  #   @grouped_recipe_foods = {}
-  #   recipes_food_arr.each do |f|
-  #     if @grouped_recipe_foods.key?(f.name)
-  #       @grouped_recipe_foods[f.name][1] += f.quantity
-  #     else
-  #       @grouped_recipe_foods[f.name] = []
-  #       @grouped_recipe_foods[f.name] << f.measurement_unit
-  #       @grouped_recipe_foods[f.name] << f.quantity
-  #       @grouped_recipe_foods[f.name] << f.price
-  #     end
-  #   end
-  #   @grouped_user_foods = {}
-  #   @foods_arr.each do |f|
-  #     if @grouped_user_foods.key?(f.name)
-  #       @grouped_user_foods[f.name][1] += f.quantity
-  #     else
-  #       @grouped_user_foods[f.name] = []
-  #       @grouped_user_foods[f.name] << f.measurement_unit
-  #       @grouped_user_foods[f.name] << f.quantity
-  #       @grouped_user_foods[f.name] << f.price
-  #     end
-  #   end
-  #   @grouped_recipe_foods.each do |key, recipe_food|
-  #     next unless @grouped_user_foods.key?(key)
-  #     recipe_quantity = recipe_food[1]
-  #     user_quantity = @grouped_user_foods[key][1]
-  #     if user_quantity >= recipe_quantity
-  #       @grouped_user_foods[key][1] -= recipe_quantity
-  #       @grouped_recipe_foods[key][1] = 0
-  #     else
-  #       @grouped_recipe_foods[key][1] -= user_quantity
-  #       @grouped_user_foods[key][1] = 0
-  #     end
-  #   end
-  #   @total_price = 0
-  #   @grouped_recipe_foods.each do |key|
-  #     @total_price += @grouped_recipe_foods[key][2] * @grouped_recipe_foods[key][1]
-  #   end
-  #   puts @grouped_recipe_foods
-  # end
-  # DELETE
+
+  def general_shopping_list
+    @list = generate_shopping_list(current_user)
+  end
+
+  def generate_shopping_list(user)
+    shopping_list = {}
+    total_value = 0
+
+    FoodRecipe.joins(recipe: :user)
+      .joins(:food)
+      .where(users: { id: user.id })
+      .group('foods.name, foods.measurement_unit, foods.price')
+      .select('foods.name, foods.measurement_unit, SUM(food_recipes.quantity) AS total_quantity, foods.price')
+      .each do |result|
+      user_food = user.foods.find_by(name: result.name)
+
+      next unless result.total_quantity > user_food.quantity
+
+      quantity_to_buy = result.total_quantity - user_food.quantity
+      total_price = quantity_to_buy * result.price
+
+      shopping_list[result.name] = {
+        quantity: quantity_to_buy,
+        measurement_unit: result.measurement_unit,
+        total_price:
+      }
+
+      total_value += total_price
+    end
+    { shopping_list:, total_value: }
+  end
 
   private
 
@@ -144,7 +130,6 @@ class RecipesController < ApplicationController
   end
 
   def public_switch_params
-    puts params
     params.require(:recipe).permit(:public)
   end
 
