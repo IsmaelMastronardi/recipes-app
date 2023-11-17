@@ -83,18 +83,16 @@ class RecipesController < ApplicationController
   end
 
   def general_shopping_list
-    puts 'AAAAAAAAAAAAAAAAA'
     @recipes = current_user.recipes
-    @recipes_food_arr = []
-    @recipes.each { |r| @recipes_food_arr.concat(r.foods) }
+
+    recipes_food_arr = []
+    @recipes.each { |r| recipes_food_arr.concat(r.foods) }
     @foods_arr = current_user.foods
   
-    puts @recipes_food_arr
 
     @grouped_recipe_foods = {}
-    @recipes_food_arr.each do |f|
+    recipes_food_arr.each do |f|
       if !@grouped_recipe_foods.key?(f.name)
-        puts 'YYYYYYYY'
         @grouped_recipe_foods[f.name] = []
         @grouped_recipe_foods[f.name] << f.measurement_unit
         @grouped_recipe_foods[f.name] << f.quantity
@@ -103,12 +101,49 @@ class RecipesController < ApplicationController
         @grouped_recipe_foods[f.name][1] += f.quantity
       end
     end
-    puts 'GGGGGGGGGGGGGGGGGGGGGGG'
+
+
+    @grouped_user_foods = {}
+    @foods_arr.each do |f|
+      if !@grouped_user_foods.key?(f.name)
+        @grouped_user_foods[f.name] = []
+        @grouped_user_foods[f.name] << f.measurement_unit
+        @grouped_user_foods[f.name] << f.quantity
+        @grouped_user_foods[f.name] << f.price
+      else
+        @grouped_user_foods[f.name][1] += f.quantity
+      end
+    end
+
+    @grouped_recipe_foods.each do |key, recipe_food|
+      if @grouped_user_foods.key?(key)
+        recipe_quantity = recipe_food[1]
+        user_quantity = @grouped_user_foods[key][1]
+  
+        if user_quantity >= recipe_quantity
+          @grouped_user_foods[key][1] -= recipe_quantity
+          @grouped_recipe_foods[key][1] = 0
+        else
+          @grouped_recipe_foods[key][1] -= user_quantity
+          @grouped_user_foods[key][1] = 0
+        end
+      end
+    end
+
+    @total_price = 0
+    @grouped_recipe_foods.each do |key|
+      @total_price += @grouped_recipe_foods[key][2] * @grouped_recipe_foods[key][1]
+    end
+
     puts @grouped_recipe_foods
   end
 
   # DELETE 
   private
+
+  def user_list
+
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
