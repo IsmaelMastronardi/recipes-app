@@ -25,8 +25,8 @@ RSpec.describe 'General Shopping List View', type: :system do
   end
   let(:food_recipe) do
     FoodRecipe.create(
-      food: food,
-      recipe: recipe,
+      food:,
+      recipe:,
       quantity: 2
     )
   end
@@ -41,7 +41,7 @@ RSpec.describe 'General Shopping List View', type: :system do
   it 'displays the details of a recipe' do
     puts food_recipe.quantity
     visit general_shopping_list_user_path(user)
-    
+
     save_and_open_page
     expect(page).to have_content('Amount of food items to buy: 1')
     expect(page).to have_content('Total value of food needed: 20')
