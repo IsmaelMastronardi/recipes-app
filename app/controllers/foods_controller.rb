@@ -3,7 +3,8 @@ class FoodsController < ApplicationController
 
   # GET /foods or /foods.json
   def index
-    @foods = Food.all
+    # @foods = Food.all
+    @foods = current_user.foods.all
   end
 
   # GET /foods/1 or /foods/1.json
@@ -59,7 +60,6 @@ class FoodsController < ApplicationController
     @food.recipes.delete(@recipe)
     redirect_back(fallback_location: recipe_path(params[:recipe_id]))
   end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.

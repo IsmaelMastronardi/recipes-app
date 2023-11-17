@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       patch 'toggle_public'
       get 'new_food'
       post 'create_food'
+      get 'general_shopping_list'
     end
   end
 

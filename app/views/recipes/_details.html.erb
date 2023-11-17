@@ -37,54 +37,54 @@
 
   <div class="mb-10">
     <button class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
-      Generate shopping list
+    <%= link_to "Generate shopping list", general_shopping_list_recipe_path(recipe) %>
     </button>
     <button class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0 ml-10">
       <%= link_to "New Ingredient", new_food_recipe_path %>
     </button>
   </div>
 
-<div class="flex flex-col w-full mb-12">
-  <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border w-1/2 mx-auto">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-              <th scope="col" class="px-6 py-3">
-                  Food
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  Quantity
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  Value
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  Actions
-              </th>
-          </tr>
-      </thead>
-      <tbody>
-        <% recipe.foods.each do |food| %>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <%= food.name %>
-              </th>
-              <td class="px-6 py-4">
-                <%= food.quantity %>
-              </td>
-              <td class="px-6 py-4">
-                <%= food.price %>
-              </td>
-              <td class="px-6 py-4">
-                <%= link_to "Modify", edit_food_path(food) %>
-                <%= form_with model: @recipe, url: destroy_food_relation_recipe_food_path(recipe, food), method: :post do |f| %>
-                  <%= f.submit "Remove" %>
-                <% end %> 
-              </td>               
-          </tr>
-          <% end %>
-      </tbody>
-  </table>
-</div>
+  <div class="flex flex-col w-full mb-12">
+    <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border w-1/2 mx-auto">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Food
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Quantity
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Value
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% recipe.foods.each do |food| %>
+            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <%= food.name %>
+                </th>
+                <td class="px-6 py-4">
+                  <%= food.quantity %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= food.price %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= link_to "Modify", edit_food_path(food) %>
+                  <%= form_with model: @recipe, url: destroy_food_relation_recipe_food_path(recipe, food), method: :post do |f| %>
+                    <%= f.submit "Remove" %>
+                  <% end %> 
+                </td>               
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+  </div>
 
 
 

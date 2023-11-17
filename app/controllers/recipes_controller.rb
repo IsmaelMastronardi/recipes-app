@@ -1,3 +1,5 @@
+require 'set'
+
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update destroy toggle_public]
 
@@ -40,7 +42,6 @@ class RecipesController < ApplicationController
   def create_food
     @recipe = Recipe.find(params[:id])
     @food = Food.build(food_params.except(:id))
-    @food.user = current_user
     @recipe.foods << @food
     if @food.save
       redirect_to recipe_path(@recipe), notice: 'Food was successfully added to the recipe.'
@@ -71,7 +72,7 @@ class RecipesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  # Togle between public and private
   def toggle_public
     @recipe.toggle!(:public)
     if @recipe.public
@@ -79,6 +80,31 @@ class RecipesController < ApplicationController
     else
       puts 'private'
     end
+  end
+
+  def general_shopping_list
+    puts 'AAAAAAAAAAAAAAAAA'
+    @recipes = current_user.recipes
+    @recipes_food_arr = []
+    @recipes.each { |r| @recipes_food_arr.concat(r.foods) }
+    @foods_arr = current_user.foods
+  
+    puts @recipes_food_arr
+
+    @grouped_recipe_foods = {}
+    @recipes_food_arr.each do |f|
+      if !@grouped_recipe_foods.key?(f.name)
+        puts 'YYYYYYYY'
+        @grouped_recipe_foods[f.name] = []
+        @grouped_recipe_foods[f.name] << f.measurement_unit
+        @grouped_recipe_foods[f.name] << f.quantity
+        @grouped_recipe_foods[f.name] << f.price
+      else
+        @grouped_recipe_foods[f.name][1] += f.quantity
+      end
+    end
+    puts 'GGGGGGGGGGGGGGGGGGGGGGG'
+    puts @grouped_recipe_foods
   end
 
   # DELETE 
