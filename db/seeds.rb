@@ -15,7 +15,7 @@
 #     )
 # end
 
-user = User.first
+user = User.find(2)
 4.times do |i|
 Recipe.create(
     name: "recipe#{i}",
