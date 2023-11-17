@@ -128,6 +128,7 @@ class RecipesController < ApplicationController
   #   puts @grouped_recipe_foods
   # end
   # DELETE
+  
   private
 
   def user_list; end
