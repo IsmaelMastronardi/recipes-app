@@ -12,9 +12,9 @@ class RecipesController < ApplicationController
   def show
     return unless user_signed_in?
     
-    puts 'BBBBBBBBBBBBBBBBBBBB'
-    @recipe.food_recipes.each {|r| puts r.quantity}
-    puts @recipe.food_recipes
+    # puts 'BBBBBBBBBBBBBBBBBBBB'
+    # @recipe.food_recipes.each {|r| puts r.quantity}
+    # puts @recipe.food_recipes
   end
 
   # GET /recipes/new
