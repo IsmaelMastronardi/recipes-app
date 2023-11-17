@@ -3,7 +3,10 @@ class FoodsController < ApplicationController
 
   # GET /foods or /foods.json
   def index
-    @foods = Food.all
+    if user_signed_in?
+      @current_user = current_user
+      @foods = Food.where(user_id: @current_user.id)
+    end
   end
 
   # GET /foods/1 or /foods/1.json
