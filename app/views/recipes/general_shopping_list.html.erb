@@ -1,8 +1,6 @@
 <h1>Shopping List</h1>
-
-<p>Amount of food items to buy: <%= @grouped_recipe_foods.size %> </p>
-<p>Total value of food needed: <%= @total_price %></p>
-
+<p>Amount of food items to buy: <%= @list[:shopping_list].size %> </p>
+<p>Total value of food needed: <%= @list[:total_value] %></p>
 
 <div class="flex flex-col w-full mb-12">
   <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border w-1/2 mx-auto">
@@ -20,20 +18,20 @@
           </tr>
       </thead>
       <tbody>
-        <% @foods_arr.each do |food| %>
+        <% @list[:shopping_list].each do |food_name, food_info| %>
           <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <%= food.name %>
-              </th>
-              <td class="px-6 py-4">
-                <%= food.quantity %>
-                <%= food.measurement_unit %>
-              </td>
-              <td class="px-6 py-4">
-                <%= food.price %>
-              </td>           
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= food_name %>
+            </th>
+            <td class="px-6 py-4">
+              <%= food_info[:quantity] %>
+              <%= food_info[:measurement_unit] %>
+            </td>
+            <td class="px-6 py-4">
+              <%= food_info[:total_price] %>
+            </td>
           </tr>
-          <% end %>
+        <% end %>
       </tbody>
   </table>
 </div>
