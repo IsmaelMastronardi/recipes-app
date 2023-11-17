@@ -55,6 +55,38 @@ class UsersController < ApplicationController
     end
   end
 
+  def general_shopping_list
+    @list = generate_shopping_list(current_user)
+  end
+
+  def generate_shopping_list(user)
+    shopping_list = {}
+    total_value = 0
+
+    FoodRecipe.joins(recipe: :user)
+      .joins(:food)
+      .where(users: { id: user.id })
+      .group('foods.name, foods.measurement_unit, foods.price')
+      .select('foods.name, foods.measurement_unit, SUM(food_recipes.quantity) AS total_quantity, foods.price')
+      .each do |result|
+      user_food = user.foods.find_by(name: result.name)
+
+      next unless result.total_quantity > user_food.quantity
+
+      quantity_to_buy = result.total_quantity - user_food.quantity
+      total_price = quantity_to_buy * result.price
+
+      shopping_list[result.name] = {
+        quantity: quantity_to_buy,
+        measurement_unit: result.measurement_unit,
+        total_price:
+      }
+
+      total_value += total_price
+    end
+    { shopping_list:, total_value: }
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
