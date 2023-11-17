@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :recipes do
     member do
       patch 'toggle_public'
+      get 'new_food'
+      post 'create_food'
     end
   end
 
