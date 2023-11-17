@@ -41,11 +41,15 @@ class RecipesController < ApplicationController
 
   def create_food
     @recipe = Recipe.find(params[:id])
-    @food = Food.build(food_params.except(:id))
-    @recipe.foods << @food
-    if @food.save
+    @food = Food.build(food_params.except(:quantity))
+    @food.user_id = current_user.id
+    @food.quantity = 0
+    @food_recipe = FoodRecipe.build(food:@food, recipe:@recipe, quantity: params[:quantity])
+
+    if @food.save && @food_recipe.save
       redirect_to recipe_path(@recipe), notice: 'Food was successfully added to the recipe.'
     else
+      puts @food.errors.full_messages
       render :new_food
     end
   end
