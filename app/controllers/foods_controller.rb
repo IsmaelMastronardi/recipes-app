@@ -54,12 +54,14 @@ class FoodsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  # DELETE 
+
+  # DELETE
   def destroy_food_relation
     @recipe = @food.recipes.find(params[:recipe_id])
     @food.recipes.delete(@recipe)
     redirect_back(fallback_location: recipe_path(params[:recipe_id]))
   end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -72,4 +74,3 @@ class FoodsController < ApplicationController
     params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
   end
 end
- 

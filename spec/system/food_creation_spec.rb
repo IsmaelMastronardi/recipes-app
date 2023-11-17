@@ -30,6 +30,6 @@ RSpec.describe 'Food creation', type: :system do
     visit new_food_path
     click_button 'Create'
 
-    expect(page).to have_content("New Food")
+    expect(page).to have_content('New Food')
   end
 end

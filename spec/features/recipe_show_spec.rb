@@ -41,7 +41,7 @@ RSpec.describe 'Recipe show', type: :system do
   end
   it 'displays the details of a recipes food' do
     visit recipe_path(recipe)
-    
+
     expect(page).to have_content('apple')
     expect(page).to have_content('10')
     expect(page).to have_content('2')

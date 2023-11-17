@@ -33,6 +33,6 @@ RSpec.describe 'Food creation', type: :system do
     visit edit_food_path(food)
     click_button 'Update'
 
-    expect(page).to have_content("Food was successfully updated")
+    expect(page).to have_content('Food was successfully updated')
   end
 end

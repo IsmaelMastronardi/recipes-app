@@ -44,8 +44,8 @@ RSpec.describe 'Recipes', type: :request do
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
+  describe 'GET /show' do
+    it 'renders a successful response' do
       recipe = Recipe.create! valid_attributes
       puts 'AAAAAAAAAAAAAA'
       get recipe_path(recipe)

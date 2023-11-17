@@ -33,7 +33,7 @@ RSpec.describe 'Food creation', type: :system do
     visit recipe_path(recipe)
     # Before delete
     expect(page).to have_content('apple')
-    
+
     click_button 'Remove'
 
     # After delete

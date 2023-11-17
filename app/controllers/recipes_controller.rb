@@ -72,6 +72,7 @@ class RecipesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   # Togle between public and private
   def toggle_public
     @recipe.toggle!(:public)
@@ -88,45 +89,45 @@ class RecipesController < ApplicationController
     recipes_food_arr = []
     @recipes.each { |r| recipes_food_arr.concat(r.foods) }
     @foods_arr = current_user.foods
-  
+
 
     @grouped_recipe_foods = {}
     recipes_food_arr.each do |f|
-      if !@grouped_recipe_foods.key?(f.name)
+      if @grouped_recipe_foods.key?(f.name)
+        @grouped_recipe_foods[f.name][1] += f.quantity
+      else
         @grouped_recipe_foods[f.name] = []
         @grouped_recipe_foods[f.name] << f.measurement_unit
         @grouped_recipe_foods[f.name] << f.quantity
         @grouped_recipe_foods[f.name] << f.price
-      else
-        @grouped_recipe_foods[f.name][1] += f.quantity
       end
     end
 
 
     @grouped_user_foods = {}
     @foods_arr.each do |f|
-      if !@grouped_user_foods.key?(f.name)
+      if @grouped_user_foods.key?(f.name)
+        @grouped_user_foods[f.name][1] += f.quantity
+      else
         @grouped_user_foods[f.name] = []
         @grouped_user_foods[f.name] << f.measurement_unit
         @grouped_user_foods[f.name] << f.quantity
         @grouped_user_foods[f.name] << f.price
-      else
-        @grouped_user_foods[f.name][1] += f.quantity
       end
     end
 
     @grouped_recipe_foods.each do |key, recipe_food|
-      if @grouped_user_foods.key?(key)
-        recipe_quantity = recipe_food[1]
-        user_quantity = @grouped_user_foods[key][1]
-  
-        if user_quantity >= recipe_quantity
-          @grouped_user_foods[key][1] -= recipe_quantity
-          @grouped_recipe_foods[key][1] = 0
-        else
-          @grouped_recipe_foods[key][1] -= user_quantity
-          @grouped_user_foods[key][1] = 0
-        end
+      next unless @grouped_user_foods.key?(key)
+
+      recipe_quantity = recipe_food[1]
+      user_quantity = @grouped_user_foods[key][1]
+
+      if user_quantity >= recipe_quantity
+        @grouped_user_foods[key][1] -= recipe_quantity
+        @grouped_recipe_foods[key][1] = 0
+      else
+        @grouped_recipe_foods[key][1] -= user_quantity
+        @grouped_user_foods[key][1] = 0
       end
     end
 
@@ -138,12 +139,10 @@ class RecipesController < ApplicationController
     puts @grouped_recipe_foods
   end
 
-  # DELETE 
+  # DELETE
   private
 
-  def user_list
-
-  end
+  def user_list; end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
