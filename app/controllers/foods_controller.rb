@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: %i[show edit update destroy destroy_food_relation]
+  before_action :set_food, only: %i[show edit update destroy]
 
   # GET /foods or /foods.json
 
@@ -55,13 +55,6 @@ class FoodsController < ApplicationController
       format.html { redirect_to foods_url, notice: 'Food was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  # DELETE
-  def destroy_food_relation
-    @recipe = @food.recipes.find(params[:recipe_id])
-    @food.recipes.delete(@recipe)
-    redirect_back(fallback_location: recipe_path(params[:recipe_id]))
   end
 
   private

@@ -1,8 +1,15 @@
-<h1>Shopping List</h1>
-<p>Amount of food items to buy: <%= @list[:shopping_list].size %> </p>
-<p>Total value of food needed: <%= @list[:total_value] %></p>
+
 
 <div class="flex flex-col w-full mb-12">
+  <div class="mx-auto mb-10 text-3xl">
+    <h1>Shopping List</h1>
+  </div>
+  <div class="mx-auto mb-10 text-2xl">
+    <p>Amount of food items to buy: <%= @list[:shopping_list].size %> </p>
+  </div>
+  <div class="mx-auto mb-10 text-2xl">
+    <p>Total value of food needed: <%= @list[:total_value] %></p>
+  </div>
   <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border w-1/2 mx-auto">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
