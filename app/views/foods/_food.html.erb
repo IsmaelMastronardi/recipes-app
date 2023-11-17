@@ -10,6 +10,9 @@
     </td>
     <td class="px-6 py-4">
         <%= button_to "Delete", food, method: :delete,
-                    data: { confirm: 'Are you sure?' } %>                  
+                    data: { confirm: 'Are you sure?' } %>     
+        <%= form_with model: @food, url: food_path(food), method: :DELETE do |f| %>
+            <%= f.submit "Remove" %>
+        <% end %>              
     </td>               
 </tr>
