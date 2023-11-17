@@ -2,7 +2,7 @@ class FoodsController < ApplicationController
   before_action :set_food, only: %i[show edit update destroy destroy_food_relation]
 
   # GET /foods or /foods.json
-  
+
   def index
     return unless user_signed_in?
 
