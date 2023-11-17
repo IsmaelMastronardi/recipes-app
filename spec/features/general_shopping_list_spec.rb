@@ -42,17 +42,9 @@ RSpec.describe 'General Shopping List View', type: :system do
     puts food_recipe.quantity
     visit general_shopping_list_user_path(user)
 
-    save_and_open_page
     expect(page).to have_content('Amount of food items to buy: 1')
     expect(page).to have_content('Total value of food needed: 20')
     expect(page).to have_content('apple')
     expect(page).to have_content('grams')
   end
-  # it 'displays the details of a recipes food' do
-  #   visit general_shopping_list_user_path(user)
-
-  #   expect(page).to have_content('apple')
-  #   expect(page).to have_content('10')
-  #   expect(page).to have_content('2')
-  # end
 end
