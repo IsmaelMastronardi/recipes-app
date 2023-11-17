@@ -9,7 +9,13 @@ class RecipesController < ApplicationController
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    return unless user_signed_in?
+    
+    puts 'BBBBBBBBBBBBBBBBBBBB'
+    @recipe.food_recipes.each {|r| puts r.quantity}
+    puts @recipe.food_recipes
+  end
 
   # GET /recipes/new
   def new
@@ -44,9 +50,9 @@ class RecipesController < ApplicationController
     @food = Food.build(food_params.except(:quantity))
     @food.user_id = current_user.id
     @food.quantity = 0
-    @food_recipe = FoodRecipe.build(food:@food, recipe:@recipe, quantity: params[:quantity])
-
+    @food_recipe = FoodRecipe.build(food:@food, recipe:@recipe, quantity: food_params[:quantity])
     if @food.save && @food_recipe.save
+      puts @food_recipe.quantity
       redirect_to recipe_path(@recipe), notice: 'Food was successfully added to the recipe.'
     else
       puts @food.errors.full_messages
@@ -86,52 +92,55 @@ class RecipesController < ApplicationController
       puts 'private'
     end
   end
-  # def general_shopping_list
-  #   @recipes = current_user.recipes
-  #   recipes_food_arr = []
-  #   @recipes.each { |r| recipes_food_arr.concat(r.foods) }
-  #   @foods_arr = current_user.foods
-  #   @grouped_recipe_foods = {}
-  #   recipes_food_arr.each do |f|
-  #     if @grouped_recipe_foods.key?(f.name)
-  #       @grouped_recipe_foods[f.name][1] += f.quantity
-  #     else
-  #       @grouped_recipe_foods[f.name] = []
-  #       @grouped_recipe_foods[f.name] << f.measurement_unit
-  #       @grouped_recipe_foods[f.name] << f.quantity
-  #       @grouped_recipe_foods[f.name] << f.price
-  #     end
-  #   end
-  #   @grouped_user_foods = {}
-  #   @foods_arr.each do |f|
-  #     if @grouped_user_foods.key?(f.name)
-  #       @grouped_user_foods[f.name][1] += f.quantity
-  #     else
-  #       @grouped_user_foods[f.name] = []
-  #       @grouped_user_foods[f.name] << f.measurement_unit
-  #       @grouped_user_foods[f.name] << f.quantity
-  #       @grouped_user_foods[f.name] << f.price
-  #     end
-  #   end
-  #   @grouped_recipe_foods.each do |key, recipe_food|
-  #     next unless @grouped_user_foods.key?(key)
-  #     recipe_quantity = recipe_food[1]
-  #     user_quantity = @grouped_user_foods[key][1]
-  #     if user_quantity >= recipe_quantity
-  #       @grouped_user_foods[key][1] -= recipe_quantity
-  #       @grouped_recipe_foods[key][1] = 0
-  #     else
-  #       @grouped_recipe_foods[key][1] -= user_quantity
-  #       @grouped_user_foods[key][1] = 0
-  #     end
-  #   end
-  #   @total_price = 0
-  #   @grouped_recipe_foods.each do |key|
-  #     @total_price += @grouped_recipe_foods[key][2] * @grouped_recipe_foods[key][1]
-  #   end
-  #   puts @grouped_recipe_foods
-  # end
-  # DELETE
+
+  def general_shopping_list
+    @recipes = current_user.recipes
+    recipes_food_arr = []
+    @recipes.each { |r| recipes_food_arr.concat(r.foods) }
+    @foods_arr = current_user.foods
+
+    @grouped_recipe_foods = {}
+    recipes_food_arr.each do |f|
+      if @grouped_recipe_foods.key?(f.name)
+        @grouped_recipe_foods[f.name][1] += f.quantity
+      else
+        @grouped_recipe_foods[f.name] = []
+        @grouped_recipe_foods[f.name] << f.measurement_unit
+        @grouped_recipe_foods[f.name] << f.quantity
+        @grouped_recipe_foods[f.name] << f.price
+      end
+    end
+    
+    @grouped_user_foods = {}
+    @foods_arr.each do |f|
+      if @grouped_user_foods.key?(f.name)
+        @grouped_user_foods[f.name][1] += f.quantity
+      else
+        @grouped_user_foods[f.name] = []
+        @grouped_user_foods[f.name] << f.measurement_unit
+        @grouped_user_foods[f.name] << f.quantity
+        @grouped_user_foods[f.name] << f.price
+      end
+    end
+    @grouped_recipe_foods.each do |key, recipe_food|
+      next unless @grouped_user_foods.key?(key)
+      recipe_quantity = recipe_food[1]
+      user_quantity = @grouped_user_foods[key][1]
+      if user_quantity >= recipe_quantity
+        @grouped_user_foods[key][1] -= recipe_quantity
+        @grouped_recipe_foods[key][1] = 0
+      else
+        @grouped_recipe_foods[key][1] -= user_quantity
+        @grouped_user_foods[key][1] = 0
+      end
+    end
+    @total_price = 0
+    @grouped_recipe_foods.each do |key|
+      @total_price += @grouped_recipe_foods[key][2] * @grouped_recipe_foods[key][1]
+    end
+    puts @grouped_recipe_foods
+  end
+
 
   private
 
