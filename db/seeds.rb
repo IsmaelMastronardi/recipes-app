@@ -14,15 +14,18 @@
 #         name: "User#{i}"
 #     )
 # end
-# user = User.first
-# Recipe.create(
-#     name: "burger",
-#     preparation_time: "20 minutes",
-#     cooking_time: "2 minutes",
-#     description: "The best meal ever!",
-#     public: true,
-#     user: user
-# )
+
+user = User.find(2)
+4.times do |i|
+Recipe.create(
+    name: "recipe#{i}",
+    preparation_time: "20 minutes",
+    cooking_time: "#{2+i} minutes",
+    description: "The best meal ever!",
+    public: true,
+    user: user
+)
+end
 
 # user = User.first
 # 4.times do |i|
@@ -35,5 +38,5 @@
 #     )
 # end
 
-food = Food.find(id:5)
+# food = Food.find(id:5)
 
