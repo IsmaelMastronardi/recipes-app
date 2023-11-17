@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :foods
   devise_for :users
+  resources :foods
   resources :recipes do
     resources :foods, only: [] do
       member do

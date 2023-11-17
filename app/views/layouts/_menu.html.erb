@@ -2,13 +2,13 @@
   <div class="container pb-10 mx-auto flex flex-wrap flex-col md:flex-row items-center">
     <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-gray-900">
-        <%= link_to 'Foods',  foods_path(current_user) %>
+        <%= link_to 'Foods',  foods_path %>
       </a>
       <a class="mr-5 hover:text-gray-900">
-        <%= link_to 'Recipes',  recipes_path(current_user) %>
+        <%= link_to 'Recipes',  recipes_path %>
       </a>
       <a class="mr-5 hover:text-gray-900">
-        <%= link_to 'Public Recipes',  recipes_path(current_user) %>
+        <%= link_to 'Public Recipes',  recipes_path %>
       </a>
       <% if user_signed_in? %>
         <a class="mr-5 hover:text-gray-900">
