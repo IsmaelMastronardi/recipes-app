@@ -1,0 +1,17 @@
+<% @recipes.each do |recipe| %>
+  <% if recipe.public %>
+    <h1><%= recipe.name %></h1>
+    <h1>By <%= recipe.user.name %></h1>
+    
+    <% food_recipe_count = @food_recipes.select { |fr| fr.recipe_id == recipe.id }.count %>
+    <h1>Total food items: <%= food_recipe_count %></h1>
+    <% sum = 0 %>
+    <% @food_recipes.each do |food_recipe| %>
+        <% if food_recipe.recipe_id == recipe.id %>
+            <% food_price = (food_recipe.food.price) * (food_recipe.quantity) %>
+        <% end %>
+        <% sum = sum + food_price %>
+    <% end %>
+    <h1>Total Price: $<%= sum %></h1>
+  <% end %>
+<% end %>
