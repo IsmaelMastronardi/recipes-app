@@ -49,7 +49,6 @@ class RecipesController < ApplicationController
     @food.quantity = 0
     @food_recipe = FoodRecipe.build(food:@food, recipe:@recipe, quantity: food_params[:quantity])
     if @food.save && @food_recipe.save
-      puts @food_recipe.quantity
       redirect_to recipe_path(@recipe), notice: 'Food was successfully added to the recipe.'
     else
       puts @food.errors.full_messages
@@ -83,11 +82,6 @@ class RecipesController < ApplicationController
   # Togle between public and private
   def toggle_public
     @recipe.toggle!(:public)
-    if @recipe.public
-      puts 'public'
-    else
-      puts 'private'
-    end
   end
 
   def general_shopping_list
@@ -137,7 +131,6 @@ class RecipesController < ApplicationController
   end
 
   def public_switch_params
-    puts params
     params.require(:recipe).permit(:public)
   end
 
