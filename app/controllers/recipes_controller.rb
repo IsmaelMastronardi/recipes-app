@@ -11,8 +11,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1 or /recipes/1.json
   def show
     nil unless user_signed_in?
-
-    # @recipe = Recipe.find(params[:id])
+    
     @recipe = Recipe.includes(:foods, :food_recipes).find(params[:id])
   end
 
