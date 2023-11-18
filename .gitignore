@@ -1,0 +1,22 @@
+node_modules/
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+
+# Ignore .env file containing sensitive information.
+.env
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore public/uploads for carrierwave file uploads.
+/public/uploads
+
+# Ignore macOS metadata files.
+.DS_Store
+/app/assets/builds/*
+!/app/assets/builds/.keep

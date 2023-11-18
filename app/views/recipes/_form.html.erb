@@ -1,0 +1,63 @@
+<%= form_with(model: recipe) do |form| %>
+  <% if recipe.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+      <ul>
+        <% recipe.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <section class="text-gray-600 body-font relative">
+    <div class="">
+      <div class="flex flex-col text-center w-full mb-12">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">New Recipe</h1>
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+          <div class="flex flex-wrap -m-2">
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= form.label :name, class: "leading-7 text-sm text-gray-600" %>
+                <%= form.text_field :name, autofocus: true, autocomplete: "name", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= form.label :preparation_time, class: "leading-7 text-sm text-gray-600" %>
+                <%= form.text_field :preparation_time, autofocus: true, autocomplete: "preparation_time", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>     
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= form.label :cooking_time, class: "leading-7 text-sm text-gray-600" %>
+                <%= form.text_field :cooking_time, autofocus: true, autocomplete: "cooking_time", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= form.label :description, class: "leading-7 text-sm text-gray-600" %>
+                <%= form.text_area :description, autofocus: true, autocomplete: "description", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= form.label :public, class: "leading-7 text-sm text-gray-600" %>
+                <%= form.check_box :public, autofocus: true, autocomplete: "public", class: "bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>
+            <div>
+              <%= form.hidden_field :user_id, value: current_user.id %>
+            </div>
+            <div class="p-2 w-full">
+              <div class="relative">
+                <button class="text-white bg-indigo-500 border-0 py-2 w-full focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                  <%= form.submit "Create" %>
+                </button>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

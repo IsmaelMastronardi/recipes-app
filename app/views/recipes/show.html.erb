@@ -1,0 +1,14 @@
+<section class="flex flex-col text-center w-full mb-12">
+  <p style="color: green"><%= notice %></p>
+
+  <% if can? :read, @recipe %>
+    <%= render 'details', recipe: @recipe %>
+  <% else %>
+    <p>This recipe is not public.</p>
+  <% end %>
+
+  <div>
+    <%= link_to "Back to recipes", recipes_path %>
+    <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+  </div>
+</section>

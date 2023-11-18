@@ -1,0 +1,51 @@
+<%= form_with model: @food, url: foods_path(), method: :post  do |f| %>
+  <section class="text-gray-600 body-font relative">
+    <div class="">
+      <div class="flex flex-col text-center w-full mb-12">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">New Food</h1>
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+          <div class="flex flex-wrap -m-2">
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= f.label :name, class: "leading-7 text-sm text-gray-600" %>
+                <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= f.label :measurement_unit, class: "leading-7 text-sm text-gray-600" %>
+                <%= f.text_field :measurement_unit, autofocus: true, autocomplete: "measurement_unit", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>           
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= f.label :price, class: "leading-7 text-sm text-gray-600" %>
+                <%= f.number_field :price, autofocus: true, autocomplete: "price", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>
+            <div class="p-2 w-full">
+              <div class="relative">
+                <%= f.label :quantity, class: "leading-7 text-sm text-gray-600" %>
+                <%= f.number_field :quantity, autofocus: true, autocomplete: "quantity", class: "w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+              </div>
+            </div>
+            <div class="p-2 w-full">
+              <div class="relative">
+                <button class="text-white bg-indigo-500 border-0 py-2 w-full focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                  <%= f.submit "Create" %>
+                </button>
+              </div>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<div class="w-full  flex flex-col justify-center text-center">
+  <div class="w-1/2 mx-auto">
+    <%= link_to "Back to foods", foods_path %>
+  </div>
+</div>
+

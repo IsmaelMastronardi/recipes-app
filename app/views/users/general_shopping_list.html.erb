@@ -1,0 +1,44 @@
+
+
+<div class="flex flex-col w-full mb-12">
+  <div class="mx-auto mb-10 text-3xl">
+    <h1>Shopping List</h1>
+  </div>
+  <div class="mx-auto mb-10 text-2xl">
+    <p>Amount of food items to buy: <%= @list[:shopping_list].size %> </p>
+  </div>
+  <div class="mx-auto mb-10 text-2xl">
+    <p>Total value of food needed: <%= @list[:total_value] %></p>
+  </div>
+  <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border w-1/2 mx-auto">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+              <th scope="col" class="px-6 py-3">
+                  Food
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Quantity
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Value
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+        <% @list[:shopping_list].each do |food_name, food_info| %>
+          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= food_name %>
+            </th>
+            <td class="px-6 py-4">
+              <%= food_info[:quantity] %>
+              <%= food_info[:measurement_unit] %>
+            </td>
+            <td class="px-6 py-4">
+              <%= food_info[:total_price] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+</div>
