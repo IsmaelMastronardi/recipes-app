@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update destroy toggle_public]
+  before_action :set_recipe, only: %i[edit update destroy toggle_public]
 
   # GET /recipes or /recipes.json
   def index
@@ -11,6 +11,8 @@ class RecipesController < ApplicationController
   # GET /recipes/1 or /recipes/1.json
   def show
     nil unless user_signed_in?
+
+    @recipe = Recipe.includes(:foods, :food_recipes).find(params[:id])
   end
 
   # GET /recipes/new
