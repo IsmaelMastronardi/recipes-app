@@ -7,21 +7,21 @@
   </div>
   <p style="color: green"><%= notice %></p>
   <% @recipes.each do |recipe| %>
-    <%= link_to recipe_path(recipe) do %>
-      <div class="p-4 w-full">
-        <div class="flex rounded-lg h-full bg-gray-100 p-8 md:w-2/3 mx-auto flex flex-row text-center">
-          <div class="md:w-1/3">
+    <div class="p-4 w-full">
+      <div class="flex rounded-lg h-full bg-gray-100 p-8 md:w-2/3 mx-auto flex flex-row text-center">
+        <div class="md:w-1/3">
+          <%= link_to recipe_path(recipe) do %>
             <h2 class="text-gray-900 text-xl title-font font-medium"><%= recipe.name %></h2>
-            <%= button_to "Remove", recipe, method: :delete, class: "flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" %>
-          </div>
-          <div class="md:w-2/3">
-            <p class="text-lg">
-              <%= recipe.description %>
-            </p>
-          </div>
+          <% end %>
+          <%= button_to "Remove", recipe, method: :delete, class: "flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" %>
+        </div>
+        <div class="md:w-2/3">
+          <%= link_to recipe_path(recipe) do %>
+            <p class="text-lg"><%= recipe.description %></p>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
 
