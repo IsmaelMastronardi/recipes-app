@@ -81,6 +81,7 @@ class RecipesController < ApplicationController
   # Togle between public and private
   def toggle_public
     @recipe.toggle!(:public)
+    redirect_to recipe_url(@recipe)
   end
 
   private
